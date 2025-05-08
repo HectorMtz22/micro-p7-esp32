@@ -1,28 +1,37 @@
-# External Interrupts (With Hardware Debounce)
+# Hardware Timers
 
-This project consists in the use of interrupts to control the state of 6 leds manually.
+The objective on this project is to implement 2 timers:
 
-You'll have a counter that decrements automatically from 9 to 0 to a 7-Segment Display.
+- Periodic timer each second for counting from 0 - 9 and display it.
+- Normal timer controlling a led each 0.5 seconds
 
-You'll also implement a hardware-based Debouncing for the buttons, because you can't implement delay on the interruptions.
+I'm using interrupts in the first one and a implementation of polling rate on the second.
 
 ## Folder contents
 
-The project **external_interrupts** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
+The project **timers** contains one source file in C language [main.c](main/main.c). The file is located in folder [main](main).
 
 ESP-IDF projects are built using CMake. The project build configuration is contained in `CMakeLists.txt` files that provide set of directives and instructions describing the project's source files and targets (executable, library, or both).
 
 Below is short explanation of remaining files in the project folder.
 
-PWM signal is based on this example: [LEDC Basic Example](https://github.com/espressif/esp-idf/tree/v5.4.1/examples/peripherals/ledc/ledc_basic)
 
 ```
 ├── CMakeLists.txt
 ├── main
 │   ├── CMakeLists.txt
 │   └── main.c
-├── components 
-│   ├── Buttons 
+├── components
+│   ├── Buttons
+│   │   ├── buttons.c
+│   │   ├── CMakeLists.txt
+│   │   └── include
+│   │       └── buttons.h
+│   ├── Timer
+│   │   ├── timer.c
+│   │   ├── CMakeLists.txt
+│   │   └── include
+│   │       └── timer.h
 │   │   ├── buttons.c
 │   │   ├── CMakeLists.txt
 │   │   └── include
@@ -49,7 +58,11 @@ For more information on structure and contents of ESP-IDF projects, please refer
 
 ## Block Diagram
 
+<center>
+
 ![Block Diagram with ESP32](/assets/images/block_diagram.png)
+
+</center>
 
 ## Schematic Diagram
 
